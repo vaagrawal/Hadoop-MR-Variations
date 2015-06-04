@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Team16</groupId>
+  <artifactId>MavenTesterProgram</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>SQLTest</name>
+  <dependencies>
+  		<dependency>
+  			<groupId>mysql</groupId>
+  			<artifactId>mysql-connector-java</artifactId>
+  			<version>5.1.6</version>
+  		</dependency>
+  </dependencies>
+  <properties>
+    <toronto>raptors</toronto>
+    <miami>heat</miami>
+  </properties>
+  
+  
+
+    <profiles>
+      <profile>
+      <id>Test</id>
+        <activation>
+        <activeByDefault>true</activeByDefault>
+          <property>
+          <db.username>root</db.username>
+            <name>environment</name>
+            <value>test</value>
+          </property>
+        </activation>
+      </profile>
+            <profile>
+      <id>Dev</id>
+        <activation>
+          <property>
+            <name>environment</name>
+            <value>test</value>
+          </property>
+        </activation>
+      </profile>
+      
+    </profiles>
+</project>
