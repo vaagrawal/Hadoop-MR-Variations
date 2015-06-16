@@ -1,0 +1,1 @@
+{"id": 100, "name": "Popat kaka", "designation": "CEO", "mgrid": 5, "hiredate": " May18", "salary": 4.0E7, "commission": 30.0, "deptid": 2}{"id": 101, "name": "Popat chela", "designation": "Peon", "mgrid": 5, "hiredate": " May18", "salary": 4000000.0, "commission": 30.0, "deptid": 2}

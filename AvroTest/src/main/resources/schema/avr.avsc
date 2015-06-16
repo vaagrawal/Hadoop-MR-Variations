@@ -1,0 +1,14 @@
+{"namespace": "com.avro.example",
+ "type": "record",
+ "name": "Employee",
+ "fields": [
+     {"name": "id", "type": "int"},
+     {"name": "name",  "type": "string"},
+     {"name": "designation", "type": ["string", "null"]},
+     {"name": "mgrid", "type": ["int", "null"]},
+     {"name": "hiredate", "type": "string"},
+     {"name": "salary", "type": "double"},
+     {"name": "commission", "type": ["double", "null"]},
+     {"name": "deptid", "type": ["int", "null"]}
+ ]
+}

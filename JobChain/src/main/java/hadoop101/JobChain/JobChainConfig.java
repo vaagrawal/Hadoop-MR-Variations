@@ -12,7 +12,6 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 public class JobChainConfig extends Configured implements Tool{
-	private static final String OUTPUT_PATH = "intermediate_output1";
 	public int run(String[] args) throws Exception {
 
 		if (args.length != 3) {
@@ -26,11 +25,13 @@ public class JobChainConfig extends Configured implements Tool{
 		Configuration conf = new Configuration();
 		Job job1 = new Job(conf);
 		job1.setJarByClass(JobChainConfig.class);
-		job1.setJobName(this.getClass().getName());
+		job1.setJobName("First Job");
 		
 		FileInputFormat.setInputPaths(job1, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job1, new Path(OUTPUT_PATH));
+		//Output to a temp path in root/tmp/
+		FileOutputFormat.setOutputPath(job1, new Path(args[1]));
 
+		job1.setMapperClass(JobChainMapper1.class);
 		job1.setMapOutputKeyClass(IntWritable.class);
 		job1.setMapOutputValueClass(Text.class);
 
@@ -44,10 +45,11 @@ public class JobChainConfig extends Configured implements Tool{
 		Configuration conf2 = new Configuration();
 		Job job2 = new Job(conf2);
 		job2.setJarByClass(JobChainConfig.class);
-		job2.setJobName(this.getClass().getName());
+		job2.setJobName("Second Job");
 		
-		FileInputFormat.setInputPaths(job2, new Path(OUTPUT_PATH));
-		FileOutputFormat.setOutputPath(job2, new Path(args[1]));
+		FileInputFormat.setInputPaths(job2, new Path(args[1]));
+		FileOutputFormat.setOutputPath(job2, new Path(args[2]));
+		job2.setMapperClass(JobChainMapper2.class);
 
 		job2.setMapOutputKeyClass(IntWritable.class);
 		job2.setMapOutputValueClass(Text.class);

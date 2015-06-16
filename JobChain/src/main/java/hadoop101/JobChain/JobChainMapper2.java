@@ -8,19 +8,21 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 public class JobChainMapper2 extends
-		Mapper<IntWritable, Text, IntWritable, Text> {
+		Mapper<LongWritable, Text, IntWritable, Text> {
 	@Override
-	protected void map(IntWritable key, Text value,
-			Mapper<IntWritable, Text, IntWritable, Text>.Context context)
+	protected void map(LongWritable key, Text value,
+			Mapper<LongWritable, Text, IntWritable, Text>.Context context)
 			throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		String line = value.toString();
 		String[] ids = line.split(",");
-		
-		String finalvalue = ids[1]+ids[2]+ids[3]+ids[4];
-		if (Integer.parseInt(ids[4])>50000) {
-			context.write(new IntWritable(Integer.parseInt(ids[0])), new Text(finalvalue));
-		}
+		ids[0]=ids[0].trim();
+	if (Integer.parseInt(ids[ids.length-1]) > 50000) {
+		String keyval=ids[0];
+		String finalvalue= ","+ids[1]+","+ids[2]+","+ids[3];
+		context.write(new IntWritable(Integer.parseInt(keyval.trim())), new Text(finalvalue));
+		//This now adds another field to the intermediate file
+	}
 	}
 
 }
